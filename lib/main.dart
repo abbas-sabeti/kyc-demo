@@ -65,9 +65,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<bool> runKyc() async {
     var workFlow = [
-      /*{
-        'type': 'document'
-      },*/
+      {
+        'type': 'document',
+        'useForFaceMatch': true,
+      },
       {
         'type': 'face',
       },
@@ -90,6 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
       prefs.setString("country", result.hyperKYCData?.selectedCountry ?? '');
       prefs.setString("image_path", result.hyperKYCData?.faceData?.fullFaceImagePath ?? '');
       prefs.setString("action", result.hyperKYCData?.faceData?.action ?? '');
+      status = result.status?.name;
+      reason = result.reason;
+      country = result.hyperKYCData?.selectedCountry;
+      imagePath = result.hyperKYCData?.faceData?.fullFaceImagePath;
+      action = result.hyperKYCData?.faceData?.action;
       return true;
     }catch (error){
       this.error = error.toString();
